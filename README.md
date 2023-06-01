@@ -1,6 +1,6 @@
-# demo1
+#ChatApp
 
-A new Flutter project.
+Trying out Flutter.
 
 ## Getting Started
 
