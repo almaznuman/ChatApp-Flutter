@@ -1,7 +1,7 @@
 import 'package:demo1/counterApp.dart';
 import 'package:flutter/material.dart';
 import 'package:demo1/LoginPage.dart';
-import 'package:demo1/chatscreen.dart';
+import 'package:demo1/chatScreen.dart';
 import './utils/brandColors.dart';
 
 void main() {

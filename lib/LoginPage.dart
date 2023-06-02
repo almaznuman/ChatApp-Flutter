@@ -2,11 +2,14 @@ import 'package:demo1/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:demo1/customWidgets/loginTextField.dart';
 import 'package:demo1/utils/spaces.dart';
+import 'package:social_media_buttons/social_media_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
 
   final _formkey = GlobalKey<FormState>();
+  final _mainUrl = "https://www.google.com";
 
   void loginUser(context) {
     if (_formkey.currentState != null && _formkey.currentState!.validate()) {
@@ -28,33 +31,20 @@ class login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 50),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Let\'s sign you in!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5),
-                  ),
-                  const Text(
-                    'Welcome back! \n You\'ve been missed!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        color: Colors.blueGrey),
-                  ),
-                  Form(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/img.png'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Form(
                     key: _formkey,
                     child: Column(
                       children: [
@@ -71,39 +61,56 @@ class login extends StatelessWidget {
                             }
                             return null;
                           },
+                          title: "Username",
                         ),
                         verticalspacing(24),
                         loginInput(
                           controller: passwordController,
                           hintText: 'Type your Password',
                           obscure: true,
+                          title: "Password",
                         ),
                       ],
                     ),
                   ),
-                  verticalspacing(24),
-                  ElevatedButton(
-                      onPressed: () {
-                        loginUser(context);
-                      },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
-                      )),
-                  GestureDetector(
-                    onTap: () {
-                      //todo: Navigate to browser
-                      print('Link clicked!');
+                ),
+                verticalspacing(0),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.black)),
+                    onPressed: () {
+                      loginUser(context);
                     },
-                    child: const Column(
-                      children: [
-                        Text('Find us on'),
-                        Text('Goddayum son'),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                    child: Text(
+                      'Login',
+                      style: ThemeTextStyle.loginTextButton,
+                    )),
+                GestureDetector(
+                  onTap: () async {
+                    print('Link clicked!');
+                    if (!await launch(_mainUrl)) {
+                      throw 'Could not launch this!';
+                    }
+                  },
+                  child: Column(
+                    children: [
+                      const Text('Find us on'),
+                      Text(_mainUrl),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SocialMediaButton.twitter(url:"https://twitter.com/home",size: 30),
+                      SocialMediaButton.facebook(url:"",size: 30)
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

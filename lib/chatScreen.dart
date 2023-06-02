@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:demo1/customWidgets/chatbubble.dart';
+import 'package:demo1/customWidgets/chatBubble.dart';
 import 'package:demo1/customWidgets/textInput.dart';
 
 class chatscreen extends StatelessWidget {
