@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:demo1/customWidgets/chatBubble.dart';
 import 'package:demo1/customWidgets/textInput.dart';
 
+import 'models/chatmsgEntity.dart';
+
 class chatscreen extends StatelessWidget {
 
   const chatscreen({Key? key}) : super(key: key);
@@ -11,10 +13,8 @@ class chatscreen extends StatelessWidget {
     final username=ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
-        title:  Center(
-          child: Text('$username',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-        ),
+        title:  Text('$username',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
         actions: [
           IconButton(
               onPressed: () {
@@ -30,7 +30,7 @@ class chatscreen extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
                   return chatbubble(
-                      message: "message",
+                  entity:chatmsgEntity(id: "12",msg: "hi",time: "2:00",author: Author(username: "Almaz")),
                       align: index%2==0? Alignment.centerRight:Alignment.centerLeft);
                 }),
           ),

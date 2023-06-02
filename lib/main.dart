@@ -11,7 +11,6 @@ void main() {
 class chatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
         title: "lorem",
         theme: ThemeData(

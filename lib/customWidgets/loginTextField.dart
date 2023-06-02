@@ -24,6 +24,8 @@ class loginInput extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         label: Text(title),labelStyle: ThemeTextStyle.loginTextFieldStyle,
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue, width: 2)),
           hintText: hintText,
           hintStyle: ThemeTextStyle.loginHintText,
           border: OutlineInputBorder(),),
