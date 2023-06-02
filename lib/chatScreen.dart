@@ -6,8 +6,15 @@ import 'models/chatmsgEntity.dart';
 
 class chatscreen extends StatelessWidget {
 
-  const chatscreen({Key? key}) : super(key: key);
+  chatscreen({Key? key}) : super(key: key);
 
+  final List<chatmsgEntity>_messages=[
+    chatmsgEntity(msg: "Goddayum", id: "dadada`", time: "5.00", author: Author(username: "almaz")),
+    chatmsgEntity(msg: "dsdsd", id: "dadada`", time: "5.00", author: Author(username: "almaz")),
+    chatmsgEntity(msg: "Goddayuqeqem", id: "dadada`", time: "5.00", author: Author(username: "dumbass")),
+    chatmsgEntity(msg: "Goddayum21111", id: "dadada`", time: "5.00", author: Author(username: "dumbass")),
+    chatmsgEntity(msg: "Go23233ddayum", id: "dadada`", time: "5.00", author: Author(username: "dumbass"))
+  ];
   @override
   Widget build(BuildContext context) {
     final username=ModalRoute.of(context)!.settings.arguments as String;
@@ -27,11 +34,11 @@ class chatscreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: _messages.length,
                 itemBuilder: (BuildContext context, int index) {
                   return chatbubble(
-                  entity:chatmsgEntity(id: "12",msg: "hi",time: "2:00",author: Author(username: "Almaz")),
-                      align: index%2==0? Alignment.centerRight:Alignment.centerLeft);
+                  entity:_messages[index],
+                      align: _messages[index].author.username=="almaz"? Alignment.centerRight:Alignment.centerLeft);
                 }),
           ),
            textinput()
