@@ -1,12 +1,23 @@
+import 'package:demo1/customWidgets/Imagepicker.dart';
+import 'package:demo1/models/chatmsgEntity.dart';
 import 'package:flutter/material.dart';
 
 class textinput extends StatelessWidget {
-  textinput({Key? key}) : super(key: key);
+  final Function(ChatMessageEntity)onsubmit;
+  textinput({Key? key,required this.onsubmit}) : super(key: key);
 
   final chatMessageController = TextEditingController();
 
+
+
+
   void onSendButtonPressed() {
     print('ChatMessage: ${chatMessageController.text}');
+    final newchatmsg = ChatMessageEntity(text: chatMessageController.text,
+        id:"555",
+        createdAt:DateTime.now().microsecondsSinceEpoch,
+        author: Author(userName: "almaz"));
+    onsubmit(newchatmsg);
   }
 
   @override
@@ -20,7 +31,11 @@ class textinput extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(context: context, builder: (BuildContext context){
+                return ImagePicker();
+              });
+            },
             icon: const Icon(
               Icons.add,
               color: Colors.white,

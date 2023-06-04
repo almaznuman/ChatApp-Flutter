@@ -1,47 +1,80 @@
-import 'package:flutter/material.dart';
-import 'package:demo1/customWidgets/chatBubble.dart';
+import 'dart:convert';
+import 'package:demo1/models/image.dart';
+import 'package:demo1/repo/imagesrepo.dart';
 import 'package:demo1/customWidgets/textInput.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'customWidgets/chatBubble.dart';
 import 'models/chatmsgEntity.dart';
 
-class chatscreen extends StatelessWidget {
-
+class chatscreen extends StatefulWidget {
   chatscreen({Key? key}) : super(key: key);
 
-  final List<chatmsgEntity>_messages=[
-    chatmsgEntity(msg: "Goddayum", id: "dadada`", time: "5.00", author: Author(username: "almaz")),
-    chatmsgEntity(msg: "dsdsd", id: "dadada`", time: "5.00", author: Author(username: "almaz")),
-    chatmsgEntity(msg: "Goddayuqeqem", id: "dadada`", time: "5.00", author: Author(username: "dumbass")),
-    chatmsgEntity(msg: "Goddayum21111", id: "dadada`", time: "5.00", author: Author(username: "dumbass")),
-    chatmsgEntity(msg: "Go23233ddayum", id: "dadada`", time: "5.00", author: Author(username: "dumbass"))
-  ];
+  @override
+  State<chatscreen> createState() => _chatscreenState();
+}
+
+class _chatscreenState extends State<chatscreen> {
+  //initiate state of messages
+  List<ChatMessageEntity> _messages = [];
+
+  _loadInitialMessages() async {
+    final response = await rootBundle.loadString('assets/msg.json');
+
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+
+    final List<ChatMessageEntity> _chatMessages = decodedList.map((listItem) {
+      return ChatMessageEntity.fromJson(listItem);
+    }).toList();
+
+    //final state of the messages
+    setState(() {
+      _messages = _chatMessages;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadInitialMessages();;
+    super.initState();
+  }
+
+  onMessagesent(ChatMessageEntity entity) {
+    _messages.add(entity);
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
-    final username=ModalRoute.of(context)!.settings.arguments as String;
+    final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
-        title:  Text('$username',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text('Hi $username!'),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.popAndPushNamed(context,'/');
+                Navigator.pushReplacementNamed(context, '/');
+                print('Icon pressed!');
               },
-              icon: const Icon(Icons.logout)),
+              icon: Icon(Icons.logout))
         ],
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-                itemCount: _messages.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return chatbubble(
-                  entity:_messages[index],
-                      align: _messages[index].author.username=="almaz"? Alignment.centerRight:Alignment.centerLeft);
-                }),
-          ),
-           textinput()
+              child: ListView.builder(
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    return ChatBubble(
+                        alignment: _messages[index].author.userName == "almaz"
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        entity: _messages[index]);
+                  })),
+          textinput(onsubmit: onMessagesent),
         ],
       ),
     );

@@ -11,9 +11,6 @@ class login extends StatelessWidget {
 
   void loginUser(context) {
     if (_formkey.currentState != null && _formkey.currentState!.validate()) {
-      print(userNameController.text);
-      print(passwordController.text);
-
       Navigator.pushReplacementNamed(context, '/chat',
           arguments: '${userNameController.text}');
       print('login successful!');
@@ -28,68 +25,67 @@ class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 50.0),
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('assets/img.png'),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 50.0),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/img.png'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    loginInput(
+                      controller: userNameController,
+                      hintText: 'Type your username',
+                      validator: (value) {
+                        if (value != null &&
+                            value.isNotEmpty &&
+                            value.length < 5) {
+                          return "Your username should be more than 5 characters";
+                        } else if (value != null && value.isEmpty) {
+                          return "Please type your username";
+                        }
+                        return null;
+                      },
+                      title: "Username, Email or Phone Number",
+                    ),
+                    verticalspacing(24),
+                    loginInput(
+                      controller: passwordController,
+                      hintText: 'Type your Password',
+                      obscure: true,
+                      title: "Password",
+                    ),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Form(
-                  key: _formkey,
-                  child: Column(
-                    children: [
-                      loginInput(
-                        controller: userNameController,
-                        hintText: 'Type your username',
-                        validator: (value) {
-                          if (value != null &&
-                              value.isNotEmpty &&
-                              value.length < 5) {
-                            return "Your username should be more than 5 characters";
-                          } else if (value != null && value.isEmpty) {
-                            return "Please type your username";
-                          }
-                          return null;
-                        },
-                        title: "Username, Email or Phone Number",
-                      ),
-                      verticalspacing(24),
-                      loginInput(
-                        controller: passwordController,
-                        hintText: 'Type your Password',
-                        obscure: true,
-                        title: "Password",
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              verticalspacing(0),
-              Container(
-                margin: const EdgeInsets.only(top: 30),
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.black)),
-                    onPressed: () {
-                      loginUser(context);
-                    },
-                    child: Text(
-                      'Login',
-                      style: ThemeTextStyle.loginTextButton,
-                    )),
-              )
-            ],
-          ),
+            ),
+            verticalspacing(0),
+            Container(
+              margin: const EdgeInsets.only(top: 30),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.black)),
+                  onPressed: () {
+                    loginUser(context);
+                  },
+                  child: Text(
+                    'Login',
+                    style: ThemeTextStyle.loginTextButton,
+                  )),
+            )
+          ],
         ),
       ),
     );
