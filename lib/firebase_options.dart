@@ -42,42 +42,5 @@ class DefaultFirebaseOptions {
         );
     }
   }
-
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCjYuPTtgJAzNkgfP7hz9BwInZV6-NUqCs',
-    appId: '1:88107289644:web:10aa5bc32960ae74b0d589',
-    messagingSenderId: '88107289644',
-    projectId: 'chatapp-2bef9',
-    authDomain: 'chatapp-2bef9.firebaseapp.com',
-    storageBucket: 'chatapp-2bef9.appspot.com',
-    measurementId: 'G-KG9KMSJ0RL',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBQ45T8GiqZRrIIhtPJ7VqaFGyJ5oNEKbs',
-    appId: '1:88107289644:android:01c645d63231dff5b0d589',
-    messagingSenderId: '88107289644',
-    projectId: 'chatapp-2bef9',
-    storageBucket: 'chatapp-2bef9.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDyc4twXxt-PHENhfJOWh4dKVwEWD-qlBg',
-    appId: '1:88107289644:ios:9c59313a062b397bb0d589',
-    messagingSenderId: '88107289644',
-    projectId: 'chatapp-2bef9',
-    storageBucket: 'chatapp-2bef9.appspot.com',
-    iosClientId: '88107289644-kutahptrvc24o3l3b3kr15921ru4cbn8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.demo1',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDyc4twXxt-PHENhfJOWh4dKVwEWD-qlBg',
-    appId: '1:88107289644:ios:7f27cd5141a0750fb0d589',
-    messagingSenderId: '88107289644',
-    projectId: 'chatapp-2bef9',
-    storageBucket: 'chatapp-2bef9.appspot.com',
-    iosClientId: '88107289644-p7rhgpmm2upr5rv006qgsn9nulggm3gb.apps.googleusercontent.com',
-    iosBundleId: 'com.example.demo1.RunnerTests',
-  );
+  //hidden
 }
