@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:demo1/models/image.dart';
-import 'package:demo1/repo/imagesrepo.dart';
 import 'package:demo1/customWidgets/textInput.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,4 +1,3 @@
-import 'package:demo1/counterApp.dart';
 import 'package:flutter/material.dart';
 import 'package:demo1/LoginPage.dart';
 import 'package:demo1/chatScreen.dart';

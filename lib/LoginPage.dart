@@ -7,7 +7,6 @@ class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
 
   final _formkey = GlobalKey<FormState>();
-  final _mainUrl = "https://www.google.com";
 
   void loginUser(context) {
     if (_formkey.currentState != null && _formkey.currentState!.validate()) {

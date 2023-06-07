@@ -54,6 +54,7 @@ class signup extends StatelessWidget {
                         if(value.length<6){
                           return 'Username must be at least 6 characters long';
                         }
+                        return null;
                       },
                       controller: usernamecontroler,
                       decoration: InputDecoration(
@@ -76,6 +77,7 @@ class signup extends StatelessWidget {
                         if(!RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$").hasMatch(value)){
                           return 'Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number';
                         }
+                        return null;
                       },
                       controller: passwordcontroler,
                       obscureText: true,

@@ -40,6 +40,7 @@ dependencies:
   social_media_buttons: ^1.0.0
   json_annotation: ^4.8.0
   http: any
+  firebase_core: ^2.13.1
 
 dev_dependencies:
   flutter_test:
